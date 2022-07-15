@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Bakery;
 
 namespace Bakery
@@ -9,47 +10,32 @@ namespace Bakery
     {
       Bread baguette = new Bread(5, "Baguette", "/baˈɡet/\nnoun: a long, narrow loaf of French bread.");
       Pastry eclair = new Pastry(2, "Eclair", "/āˈkler,iˈkler/\nnoun: a small, soft, log-shaped pastry filled with cream and typically topped with chocolate icing.");
+      List<Item> items= new List<Item> {baguette, eclair};
 
-      Welcome(baguette, eclair);
-      int order = Order();
-      int quantity;
-      switch(order){
-        case 1:
-          Console.WriteLine("\nLe pain est acheté 2 obtenez 1 gratuit");
-          Console.WriteLine("\nThe bread is buy 2 get 1 free");
-          quantity = Order();
-          while(quantity == 0){
-            Console.WriteLine("\nVeuillez entrer un nombre supérieur à 0");
-            Console.WriteLine("\nPlease enter a whole number greater than 0");
-            quantity = Order();
-          }
-          baguette.Buy(quantity);
-          break;
-        case 2:
-          Console.WriteLine("\nLes pâtisseries sont acheter 2 obtenir 1 moitié prix");
-          Console.WriteLine("\nPastries are buy 2 get 1 at half price");
-          quantity = Order();
-          while(quantity == 0){
-            Console.WriteLine("\nVeuillez entrer un nombre supérieur à 0");
-            Console.WriteLine("\nPlease enter a whole number greater than 0");
-            quantity = Order();
-          }
-          eclair.Buy(quantity);
-          break;
-        case 0:
-          Console.WriteLine("Veuillez entrer 1 ou 2");
-          Console.WriteLine("Please enter 1 for baguette or 2 for eclair");
-          Main();
-          break;
+      Welcome(items);
+      double cost;
+      do {
+        Menu(items);
+        int order = Order();
+        cost = Checkout(items, order);
+      } while(cost != 0);
+      
+    }
+
+    public static void Welcome(List<Item> items)
+    {
+      Console.WriteLine("\nBienvenu à La Pâtisserie de Pierre\nLe Menu:");
+      for (int i=0; i<items.Count; i++) {
+        Console.WriteLine($"\n{items[i].Name} — ${string.Format("{0:0.00}", items[i].Price)}\n{items[i].Description}");
       }
     }
 
-    public static void Welcome(Bread baguette, Pastry eclair)
+    public static void Menu(List<Item> items)
     {
-      Console.WriteLine("\nBienvenu à La Pâtisserie de Pierre\nLe Menu:");
-      Console.WriteLine("\n"+baguette.Name+" — $"+string.Format("{0:0.00}",baguette.Price)+"\n"+baguette.Description);
-      Console.WriteLine("\n"+eclair.Name+" — $"+string.Format("{0:0.00}",eclair.Price)+"\n"+eclair.Description);
-      Console.WriteLine("\nQue désirez-vous?\n(1) baguette\n(2) eclair");
+      Console.WriteLine("\nQue désirez-vous?");
+      for (int i=0; i<items.Count; i++) {
+        Console.WriteLine($"({i+1}) {items[i].Name}");
+      }
     }
 
     public static int Order()
@@ -57,11 +43,61 @@ namespace Bakery
       int number;
       string selection = Console.ReadLine();
       bool valid = int.TryParse(selection, out number);
-      if (valid) {
+      if (valid && number > 0) {
         return number;
       } else {
         return 0;
       }
+    }
+
+    public static int ReOrder()
+    {
+      int quantity = 0;
+      Console.WriteLine("\nVeuillez entrer un nombre supérieur à 0");
+      Console.WriteLine("Please enter a whole number greater than 0");
+      quantity = Order();
+      return quantity;
+    }
+
+    public static double Checkout(List<Item> items, int order)
+    {
+      int quantity = 0;
+      double cost = 0.0;
+      for (int i=0; i<items.Count; i++) {
+        if (order == i+1) {
+          if(items[i].GetType() == typeof(Bread)) {
+            Console.WriteLine("\nLe pain est acheté 2 obtenez 1 gratuit");
+            Console.WriteLine("The bread is buy 2 get 1 free");
+            Console.WriteLine("\nCombien en voudrais-tu?");
+            Console.WriteLine("How many would you like?");          
+            quantity = Order();
+            while(quantity == 0){
+              quantity = ReOrder();
+            }
+            cost = items[i].Buy(quantity);
+            break;
+
+          } else if (items[i].GetType() == typeof(Pastry)) {
+            Console.WriteLine("\nLes pâtisseries sont acheter 2 obtenir 1 moitié prix");
+            Console.WriteLine("Pastries are buy 2 get 1 at half price");
+            Console.WriteLine("\nCombien en voudrais-tu?");
+            Console.WriteLine("How many would you like?");
+            quantity = Order();
+            while(quantity == 0){
+              quantity = ReOrder();
+            }
+            cost = items[i].Buy(quantity);
+            break;
+          }
+        }
+      }
+      Console.WriteLine(cost);
+      return cost;
+    }
+
+    public void Receipt() 
+    {
+
     }
   }
 }

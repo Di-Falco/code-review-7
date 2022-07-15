@@ -13,17 +13,17 @@ namespace Bakery
       Name = name;
       Description = description;
     }
-
   }
 
   public class Bread : Item
   {
-
-    public Bread() { }
+    public double Price {get; set;}
+    public string Name {get; set;}
+    public string Description {get; set;}
 
     public Bread(double price, string name, string description) {
-      Price = price;
-      Name = name;
+      this.Price = price;
+      this.Name = name;
       Description = description;
     }
 
@@ -40,15 +40,17 @@ namespace Bakery
     }
   }
 
-  public class Pastry : Item
+  public class Pastry
   {
 
-    public Pastry() { }
+    public double Price {get; set;}
+    public string Name {get; set;}
+    public string Description {get; set;}
 
     public Pastry(double price, string name, string description) {
-      Price = price;
-      Name = name;
-      Description = description;
+      this.Price = price;
+      this.Name = name;
+      this.Description = description;
     }
 
     public double Buy (int quantity) {
