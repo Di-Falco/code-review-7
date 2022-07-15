@@ -51,5 +51,12 @@ namespace Bakery.Tests
 
       Assert.AreEqual(6, testAppetizer.Buy(2));
     }
+    [TestMethod]
+    public void BuyAppetizer_ReturnTheCostOfThreeAppetizers_Double()
+    {
+      Appetizer testAppetizer = new Appetizer(4, "");
+
+      Assert.AreEqual(8, testAppetizer.Buy(3));
+    }    
   }
 }

@@ -1,3 +1,5 @@
+using System;
+
 namespace Bakery
 {
   public class Item
@@ -57,7 +59,7 @@ namespace Bakery
     {
       double totalPrice = 0.0;
       for (int i=1; i<=quantity; i++) {
-        totalPrice += this.Price / i;
+        totalPrice += Math.Ceiling(this.Price / i);
       }
       return totalPrice;
     }

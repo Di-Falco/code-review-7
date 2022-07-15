@@ -12,7 +12,9 @@ namespace Bakery
       Bread sourdough = new Bread(7.5, "Pain de Campagne");
       Pastry eclair = new Pastry(2, "Eclair");
       Pastry macaron = new Pastry(1.5, "Macarón");
-      Item[] items= new Item[] {baguette, sourdough, eclair, macaron};
+      Appetizer escargo = new Appetizer(4, "Escargo");
+      Appetizer cigarette = new Appetizer(3, "Cigarette");
+      Item[] items= new Item[] {baguette, sourdough, eclair, macaron, escargo, cigarette};
 
       Welcome(items);
       double cost;
@@ -90,7 +92,18 @@ namespace Bakery
             }       
             cost = items[i].Buy(quantity);
             break;
-          }
+          } else if (items[i].GetType() == typeof(Appetizer)) {
+            Console.WriteLine("\nLes hors-d'œuvre sont tarifés en divisant le prix de chaque article par la place de cet article dans la séquence et en arrondissant.");
+            Console.WriteLine("Appetizers are priced by dividing the price of the \'n\'th item by n, rounding up to the nearest whole number, and adding that value to the total cost.");
+            Console.WriteLine("\nCombien en voudrais-tu?");
+            Console.WriteLine("How many would you like?");
+            quantity = Order();
+            while(quantity == 0){
+              quantity = ReOrder();
+            }       
+            cost = items[i].Buy(quantity);
+            break;
+          }          
         }
       }
       return cost;
