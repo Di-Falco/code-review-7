@@ -48,4 +48,18 @@ namespace Bakery
       return totalPrice;
     }
   }
+
+  public class Appetizer : Item
+  {
+    public Appetizer(double price, string name) : base(price, name){ }
+
+    public override double Buy (int quantity)
+    {
+      double totalPrice = 0.0;
+      for (int i=1; i<=quantity; i++) {
+        totalPrice += this.Price / i;
+      }
+      return totalPrice;
+    }
+  }
 }
