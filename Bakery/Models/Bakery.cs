@@ -1,33 +1,28 @@
 namespace Bakery
 {
   public class Item
-  {
+  {        
     public double Price {get; set;}
     public string Name {get; set;}
     public string Description {get; set;}
 
-    public Item () { }
+    public Item(double price, string name, string description) {
+      this.Price = price;
+      this.Name = name;
+      this.Description = description;
+    }
 
-    public Item (double price, string name, string description) {
-      Price = price;
-      Name = name;
-      Description = description;
+    public virtual double Buy (int quantity) {
+      return quantity * 0;
     }
   }
 
   public class Bread : Item
   {
-    public double Price {get; set;}
-    public string Name {get; set;}
-    public string Description {get; set;}
 
-    public Bread(double price, string name, string description) {
-      this.Price = price;
-      this.Name = name;
-      Description = description;
-    }
+    public Bread(double price, string name, string description) : base(price, name, description){ }
 
-    public double Buy (int quantity) {
+    public override double Buy (int quantity) {
       double totalPrice = 0.0;
       for (int i=1; i<=quantity; i++) {
         if (i % 3 == 0) {
@@ -40,20 +35,12 @@ namespace Bakery
     }
   }
 
-  public class Pastry
+  public class Pastry : Item
   {
 
-    public double Price {get; set;}
-    public string Name {get; set;}
-    public string Description {get; set;}
+    public Pastry(double price, string name, string description) : base(price, name, description){ }
 
-    public Pastry(double price, string name, string description) {
-      this.Price = price;
-      this.Name = name;
-      this.Description = description;
-    }
-
-    public double Buy (int quantity) {
+    public override double Buy (int quantity) {
       double totalPrice = 0.0;
       for (int i=1; i<=quantity; i++) {
         if (i % 3 == 0) {
