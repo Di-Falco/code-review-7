@@ -9,8 +9,10 @@ namespace Bakery
     static void Main()
     {
       Bread baguette = new Bread(5, "Baguette");
+      Bread sourdough = new Bread(7.5, "Pain de Campagne");
       Pastry eclair = new Pastry(2, "Eclair");
-      Item[] items= new Item[2] {baguette, eclair};
+      Pastry macaron = new Pastry(1.5, "Macarón");
+      Item[] items= new Item[] {baguette, sourdough, eclair, macaron};
 
       Welcome(items);
       double cost;
