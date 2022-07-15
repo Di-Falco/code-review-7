@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Bakery;
 
 namespace Bakery
@@ -15,7 +16,7 @@ namespace Bakery
       Appetizer escargo = new Appetizer(9.00, "Escargo");
       Appetizer cigarette = new Appetizer(4.00, "Cigarette");
       Item[] items= new Item[] {baguette, sourdough, eclair, macaron, escargo, cigarette};
-      Dictionary<string, int> purchase = new Dictionary<string, int>();
+      Dictionary<Item, int> purchase = new Dictionary<Item, int>();
 
       Welcome(items);
       double total = 0.0;
@@ -24,12 +25,18 @@ namespace Bakery
       do {
         Menu(items);
         int order = Order();
-        cost = Checkout(items, order, purchase);
+        while (order == 0)
+        {
+          Console.WriteLine("Please select an item by entering a number 1-6");
+          order = Order();
+        }
+        purchase = Checkout(items, order, purchase);
+        cost = purchase.Keys.Last().Buy(purchase.Values.Last());
         total += cost;
         quit = QuitPrompt();
       } while(quit == false);
 
-      Receipt(total);
+      Receipt(purchase, total);
     }
 
     static void Welcome(Item[] items)
@@ -68,14 +75,13 @@ namespace Bakery
       return quantity;
     }
 
-    static double Checkout(Item[] items, int order, Dictionary<string, int> purchase)
+    static Dictionary<Item, int> Checkout(Item[] items, int order, Dictionary<Item, int> purchase)
     {
       int quantity = 0;
-      double cost = 0.0;
+      Item item = new Item(0, ""); 
       do {
-        for (int i=0; i<items.Length; i++) {
-          if (order == i+1) {
-            if(items[i].GetType() == typeof(Bread)) {
+          item = items[order-1];
+            if(item.GetType() == typeof(Bread)) {
               Console.WriteLine("\nLe pain est acheté 2 obtenez 1 gratuit");
               Console.WriteLine("The bread is buy 2 get 1 free");
               Console.WriteLine("How many would you like?");          
@@ -83,33 +89,28 @@ namespace Bakery
               while(quantity == 0){
                 quantity = ReOrder();
               }
-              cost = items[i].Buy(quantity);
-              break;
-            } else if (items[i].GetType() == typeof(Pastry)) {
+            } else if (item.GetType() == typeof(Pastry)) {
               Console.WriteLine("\nLes pâtisseries sont acheter 2 obtenir 1 moitié prix");
               Console.WriteLine("Pastries are buy 2 get 1 at half price");
               Console.WriteLine("How many would you like?");
               quantity = Order();
               while(quantity == 0){
                 quantity = ReOrder();
-              }       
-              cost = items[i].Buy(quantity);
-              break;
-            } else if (items[i].GetType() == typeof(Appetizer)) {
+              }
+            } else if (item.GetType() == typeof(Appetizer)) {
               Console.WriteLine("\nLes hors-d'œuvre sont tarifés en divisant le prix de chaque article par la place de cet article dans la séquence et en arrondissant.");
               Console.WriteLine("Appetizers are priced by dividing the price of the \'n\'th item by n, rounding up to the nearest whole number, and adding that value to the total cost.");
               Console.WriteLine("How many would you like?");
               quantity = Order();
               while(quantity == 0){
                 quantity = ReOrder();
-              }       
-              cost = items[i].Buy(quantity);
-              break;
+              }
+            } else {
+              Console.WriteLine("Please select an quantity by entering a number greater than 0");
             }
-          }      
-        }
-      } while (cost == 0); 
-      return cost;
+        } while (quantity <= 0);
+      purchase.Add(item, quantity);
+      return purchase;
     }
 
     static bool QuitPrompt() {
@@ -126,8 +127,12 @@ namespace Bakery
       return false;
     }
 
-    static void Receipt(double cost) 
+    static void Receipt(Dictionary<Item, int> purchase, double cost) 
     {
+      Console.WriteLine("Items:");
+      for (int i=0; i<purchase.Count; i++) {
+        Console.WriteLine($"{i+1}. {purchase.ElementAt(i).Key.Name} — {purchase.ElementAt(i).Value}");
+      }
       Console.WriteLine($"Votre total est: ${string.Format("{0:0.00}", cost)}\n\"L'important c'est pas la chute, c'est l'atterrissage\"");
     }
   }

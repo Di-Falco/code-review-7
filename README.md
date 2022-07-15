@@ -1,30 +1,32 @@
-# (Application Name)
+# Pierre's Bakery
 
-#### (Brief Description of Application)
+#### Order from 6 items at an authentic French bakery
 
-#### By (Your Name Here)
+#### By Anthony DiFalco
 
 ## Technologies Used
 
-* _List all_
-* _the major technologies_
-* _you used in your project_
-* _here_
+* C#
+* .NET
+* Visual Studio Code
 
 ## Description
 
+This project uses C# classes to take and store a user-input order at an imaginary French bakery. The entier program is limited to the Console.
+
+Upon running, the user is prompted to select an item from the menu by entering the item's number. The next prompt is to enter the desired quantity of the selected item. Then the user is given the option to purchase more items or end their order by entering Y or N. The program displays each item the user ordered along with their quantities, and the total cost of all items in the order.
+
 ## Setup/Installation Requirements
 
-* git clone 
-* change the project names in Template.Tests.csproj to match your project
-* change file names to match your project
-* run $ dotnet restore
-* uncomment line 5 in Template.csproj after you add UI logic. 
+* To run this program you will need to install VSCode, along with C# and .NET
+* From your terminal run&emsp;```git clone https://github.com/Di-Falco/code-review-7```
+* From the Bakery directory run&emsp;```dotnet restore```&emsp;and&emsp;```dotnet run```
+* Follow the prompts to place an order
 
 ## Known Bugs
 
-* _Any known issues_
-* _should go here_
+* Currently the program does not display the cost of each item
+* if the user selects the same item multiple times, each instance will appear as a seperate item in the final order display
 
 ## License
 
