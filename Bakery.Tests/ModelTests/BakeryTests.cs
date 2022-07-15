@@ -11,7 +11,7 @@ namespace Bakery.Tests
     {
       Bread testBread = new Bread(5, "", "");
 
-      Assert.AreEqual(5, testBread.BuyBread(1));
+      Assert.AreEqual(5, testBread.Buy(1));
     }
 
     [TestMethod]
@@ -19,7 +19,15 @@ namespace Bakery.Tests
     {
       Bread testBread = new Bread(5, "", "");
 
-      Assert.AreEqual(10, testBread.BuyBread(3));
+      Assert.AreEqual(10, testBread.Buy(3));
+    }
+
+    [TestMethod]
+    public void BuyPastry_ReturnTheCostOfOnePastry_Double()
+    {
+      Pastry testPastry = new Pastry(2, "", "");
+
+      Assert.AreEqual(2, testPastry.Buy(1));
     }
   }
 }
