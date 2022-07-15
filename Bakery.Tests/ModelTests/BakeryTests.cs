@@ -29,5 +29,12 @@ namespace Bakery.Tests
 
       Assert.AreEqual(2, testPastry.Buy(1));
     }
+    [TestMethod]
+    public void BuyPastry_ReturnTheCostOfThreePastries_Double()
+    {
+      Pastry testPastry = new Pastry(2, "", "");
+
+      Assert.AreEqual(5, testPastry.Buy(3));
+    }
   }
 }

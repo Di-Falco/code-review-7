@@ -55,7 +55,7 @@ namespace Bakery
       double totalPrice = 0.0;
       for (int i=1; i<=quantity; i++) {
         if (i % 3 == 0) {
-          totalPrice += 0;
+          totalPrice += this.Price / 2;
         } else {
           totalPrice += this.Price;
         }
