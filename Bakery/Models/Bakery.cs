@@ -19,7 +19,6 @@ namespace Bakery
 
   public class Bread : Item
   {
-
     public Bread(double price, string name, string description) : base(price, name, description){ }
 
     public override double Buy (int quantity) {
@@ -37,7 +36,6 @@ namespace Bakery
 
   public class Pastry : Item
   {
-
     public Pastry(double price, string name, string description) : base(price, name, description){ }
 
     public override double Buy (int quantity) {
