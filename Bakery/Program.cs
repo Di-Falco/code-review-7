@@ -15,6 +15,7 @@ namespace Bakery
       Appetizer escargo = new Appetizer(9.00, "Escargo");
       Appetizer cigarette = new Appetizer(4.00, "Cigarette");
       Item[] items= new Item[] {baguette, sourdough, eclair, macaron, escargo, cigarette};
+      Dictionary<string, int> purchase = new Dictionary<string, int>();
 
       Welcome(items);
       double total = 0.0;
@@ -23,7 +24,7 @@ namespace Bakery
       do {
         Menu(items);
         int order = Order();
-        cost = Checkout(items, order);
+        cost = Checkout(items, order, purchase);
         total += cost;
         quit = QuitPrompt();
       } while(quit == false);
@@ -67,7 +68,7 @@ namespace Bakery
       return quantity;
     }
 
-    static double Checkout(Item[] items, int order)
+    static double Checkout(Item[] items, int order, Dictionary<string, int> purchase)
     {
       int quantity = 0;
       double cost = 0.0;
