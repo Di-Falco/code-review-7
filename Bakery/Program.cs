@@ -8,8 +8,8 @@ namespace Bakery
   {
     static void Main()
     {
-      Bread baguette = new Bread(5, "Baguette", "/baˈɡet/\nnoun: a long, narrow loaf of French bread.");
-      Pastry eclair = new Pastry(2, "Eclair", "/āˈkler,iˈkler/\nnoun: a small, soft, log-shaped pastry filled with cream and typically topped with chocolate icing.");
+      Bread baguette = new Bread(5, "Baguette");
+      Pastry eclair = new Pastry(2, "Eclair");
       Item[] items= new Item[2] {baguette, eclair};
 
       Welcome(items);
@@ -26,7 +26,7 @@ namespace Bakery
     {
       Console.WriteLine("\nBienvenu à La Pâtisserie de Pierre\nLe Menu:");
       for (int i=0; i<items.Length; i++) {
-        Console.WriteLine($"\n{items[i].Name} — ${string.Format("{0:0.00}", items[i].Price)}\n{items[i].Description}");
+        Console.WriteLine($"\n{items[i].Name} — ${string.Format("{0:0.00}", items[i].Price)}");
       }
     }
 

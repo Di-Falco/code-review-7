@@ -4,12 +4,10 @@ namespace Bakery
   {        
     public double Price {get; set;}
     public string Name {get; set;}
-    public string Description {get; set;}
 
-    public Item(double price, string name, string description) {
+    public Item(double price, string name) {
       this.Price = price;
       this.Name = name;
-      this.Description = description;
     }
 
     public virtual double Buy (int quantity) {
@@ -19,7 +17,7 @@ namespace Bakery
 
   public class Bread : Item
   {
-    public Bread(double price, string name, string description) : base(price, name, description){ }
+    public Bread(double price, string name) : base(price, name){ }
 
     public override double Buy (int quantity) {
       double totalPrice = 0.0;
@@ -36,7 +34,7 @@ namespace Bakery
 
   public class Pastry : Item
   {
-    public Pastry(double price, string name, string description) : base(price, name, description){ }
+    public Pastry(double price, string name) : base(price, name){ }
 
     public override double Buy (int quantity) {
       double totalPrice = 0.0;
