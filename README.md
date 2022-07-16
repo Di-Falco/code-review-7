@@ -26,7 +26,6 @@ Upon running, the user is prompted to select an item from the menu by entering t
 ## Known Bugs
 
 * Currently the program does not display the cost of each item
-* if the user selects the same item multiple times, each instance will appear as a seperate item in the final order display
 
 ## License
 
