@@ -25,7 +25,7 @@ Upon running, the user is prompted to select an item from the menu by entering t
 
 ## Known Bugs
 
-* Currently the program does not display the cost of each item
+* None
 
 ## License
 

@@ -134,12 +134,16 @@ namespace Bakery
     static void Receipt(Dictionary<Item, int> purchase) 
     {
       double total = 0.0;
+      double grossTotal = 0.0;
       Console.WriteLine("Items:");
       for (int i=0; i<purchase.Count; i++) {
-        Console.WriteLine($"{i+1}. {purchase.ElementAt(i).Key.Name} — {purchase.ElementAt(i).Value}");
+        Console.WriteLine($"{i+1}. {purchase.ElementAt(i).Key.Name} — {purchase.ElementAt(i).Value} x {string.Format("{0:0.00}", purchase.ElementAt(i).Key.Price)} each");
+        grossTotal += purchase.ElementAt(i).Key.Price * purchase.ElementAt(i).Value;
         total += purchase.ElementAt(i).Key.Buy(purchase.ElementAt(i).Value);
       }
-      Console.WriteLine($"Votre total est: ${string.Format("{0:0.00}", total)}\n\"L'important c'est pas la chute, c'est l'atterrissage\"");
+      Console.WriteLine($"Votre total est: ${string.Format("{0:0.00}", total)}");
+      Console.WriteLine($"Vous avez économisé ${string.Format("{0:0.00}", (grossTotal-total))}");
+      Console.WriteLine("L'important c'est pas la chute, c'est l'atterrissage");
     }
   }
 }
