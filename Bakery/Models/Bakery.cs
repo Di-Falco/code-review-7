@@ -23,13 +23,7 @@ namespace Bakery
 
     public override double Buy (int quantity) {
       double totalPrice = 0.0;
-      for (int i=1; i<=quantity; i++) {
-        if (i % 3 == 0) {
-          totalPrice += 0;
-        } else {
-          totalPrice += this.Price;
-        }
-      }
+      totalPrice = (quantity * this.Price) - (quantity/3 * this.Price);
       return totalPrice;
     }
   }
@@ -40,13 +34,7 @@ namespace Bakery
 
     public override double Buy (int quantity) {
       double totalPrice = 0.0;
-      for (int i=1; i<=quantity; i++) {
-        if (i % 3 == 0) {
-          totalPrice += this.Price / 2;
-        } else {
-          totalPrice += this.Price;
-        }
-      }
+      totalPrice = (quantity * this.Price) - ((quantity/3) * (this.Price/2));
       return totalPrice;
     }
   }
