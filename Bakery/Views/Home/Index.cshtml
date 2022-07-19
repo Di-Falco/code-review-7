@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pierre's</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+  <body>
+    @using Bakery.Models;
+    <h1>Bienvenu à La Pâtisserie de Pierre</h1>
+    <h3>Le Menu:</h3>
+      @foreach (Item item in Model) {
+        Console.WriteLine($"{item.Name} — ${string.Format("{0:0.00}", item.Price)}");
+      }
+  </body>
+</html>
